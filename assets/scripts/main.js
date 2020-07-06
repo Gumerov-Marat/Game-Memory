@@ -9,9 +9,7 @@ scene.preload = function () {
 
 scene.create = function () {
   //2. Вывести бэкграунд на экран
-  
   let bg = this.add.sprite( 0, 0,'bg').setOrigin(0, 0)
-  
 }
 
 
