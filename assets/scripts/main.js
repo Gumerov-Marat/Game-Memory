@@ -3,13 +3,14 @@ let scene = new Phaser.Scene('Game')
 
 scene.preload = function () {
   //1. Загрузить бэкграунд
-  console.log('preload');
+  this.load.image('bg', 'assets/sprites/background.png')
   
 }
 
 scene.create = function () {
   //2. Вывести бэкграунд на экран
-  console.log('create');
+  
+  let bg = this.add.sprite( 0, 0,'bg').bg.setOrigin(0, 0)
   
 }
 
