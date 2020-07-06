@@ -13,8 +13,6 @@ scene.create = function () {
 }
 
 
-
-
 // settings Phaser
 let config = {
   //озанчает что рендерить Phaser будет по умолчанию через Webgl (or canvas)
