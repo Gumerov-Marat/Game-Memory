@@ -13,9 +13,19 @@ class GameScene extends Phaser.Scene {
     this.load.image('card5', 'assets/sprites/card5.png')
   }
 
+  createText(){
+    this.timeoutText = this.add.text(10, 330, 'Time:',{
+      font: '36px Linearo',
+      fill: '#ffffff'
+    } )
+    console.log(this.timeoutText);
+    
+  }
+
   create(){
     this.createBackground()
-    this.createCards();
+    this.createText()
+    this.createCards()
     this.start()
   }
 
