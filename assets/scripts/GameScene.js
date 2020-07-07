@@ -9,13 +9,21 @@ class GameScene extends Phaser.Scene {
   }
 
   create(){
-    //2. Вывести бэкграунд на экран
-    //this.add.sprite(this.sys.game.config.width / 2)
-    this.add.sprite(0, 0, 'bg').setOrigin(0, 0)
+    this.createBackground();
+    this.createCards();
+  }
 
+  createBackground(){
+    this.add.sprite(0, 0, 'bg').setOrigin(0, 0)
+  }
+
+  createCards(){
+    this.cards = [];
     let positions = this.getCardPositions()
+
     for (let position of positions) {
-      this.add.sprite(position.x, position.y, 'card').setOrigin(0, 0)
+      this.cards.push(new Card(this, position))
+      //this.add.sprite(position.x, position.y, 'card').setOrigin(0, 0)
     }
   }
 
