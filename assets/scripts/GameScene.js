@@ -32,8 +32,12 @@ class GameScene extends Phaser.Scene {
         this.cards.push(new Card(this, value, positions.pop()))
       }
     }
+    this.input.on('gameObjectDown', this.onCardClicked, this)
   }
 
+  onCardClicked(pointer, card){
+    card.open()
+  }
   getCardPositions(){
     let positions = []
     let paddingCard = 4
