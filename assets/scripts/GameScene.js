@@ -14,9 +14,25 @@ class GameScene extends Phaser.Scene {
   }
 
   create(){
-    this.createBackground();
+    this.createBackground()
     this.createCards();
+    this.start()
+  }
+
+  start(){
     this.openedCard = null
+    this.openCardsCount = 0
+    this.initCards()
+  }
+
+  initCards(){
+    let positions = this.getCardPositions()
+  
+    this.cards.forEach(card => {
+      let position = positions.pop()
+      card.close()
+      card.setPosition(position.x, position.y)
+    })
   }
 
   createBackground(){
@@ -25,14 +41,13 @@ class GameScene extends Phaser.Scene {
 
   createCards(){
     this.cards = [];
-    let positions = this.getCardPositions()
-    Phaser.Utils.Array.Shuffle(positions)
-
+  
     for (let value of config.cards) {
       for (let i = 0; i < 2; i++){
-        this.cards.push(new Card(this, value, positions.pop()))
+        this.cards.push(new Card(this, value))
       }
     }
+
     this.input.on("gameobjectdown", this.onCardClicked, this)
   }
 
@@ -43,8 +58,9 @@ class GameScene extends Phaser.Scene {
 
     if(this.openedCard){
       if(this.openedCard.value === card.value){
-        //картинки равны
+        //картинки равны - запомнить
         this.openedCard = null
+        ++this.openCardsCount
       } else {
         // картинки разные - скрыть прошлую
         this.openedCard.close()
@@ -56,6 +72,9 @@ class GameScene extends Phaser.Scene {
     }
 
     card.open()
+    if (this.openCardsCount === this.cards.length / 2) {
+      this.start()
+    }
   }
   getCardPositions(){
     let positions = []
@@ -63,10 +82,8 @@ class GameScene extends Phaser.Scene {
     let cardTexture = this.textures.get('card').getSourceImage()
     let cardWidth = cardTexture.width + paddingCard
     let cardHeight = cardTexture.height + paddingCard
-
     let offsetX = (this.sys.game.config.width - cardWidth * config.cols) / 2;
     let offsetY = (this.sys.game.config.height - cardHeight * config.rows) / 2;
-
 
     for (let row = 0; row < config.rows; row++) {
       for (let col = 0; col < config.cols; col++) {
@@ -76,6 +93,6 @@ class GameScene extends Phaser.Scene {
         })
       }
     }
-    return positions
+    return Phaser.Utils.Array.Shuffle(positions)
   }
 }
