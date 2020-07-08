@@ -1,1 +1,1 @@
-Game-Memory.github.io
+https://gumerov-marat.github.io/Game-Memory/
