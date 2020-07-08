@@ -3,7 +3,6 @@ class GameScene extends Phaser.Scene {
     super('Game')
   }
   preload(){
-    //1. Загрузить бэкграунд
     this.load.image('bg', 'assets/sprites/background.png')
     this.load.image('card', 'assets/sprites/card.png')
     this.load.image('card1', 'assets/sprites/card1.png')
@@ -56,7 +55,7 @@ class GameScene extends Phaser.Scene {
       timeout: this.sound.add('timeout')
     }
 
-    this.sounds.theme.play({volume: 0.1})
+    this.sounds.theme.play({volume: 0.2})
   }
 
   create(){
@@ -143,17 +142,14 @@ class GameScene extends Phaser.Scene {
 
     if(this.openedCard){
       if(this.openedCard.value === card.value){
-        //картинки равны - запомнить
         this.sounds.success.play()
         this.openedCard = null
         ++this.openCardsCount
       } else {
-        // картинки разные - скрыть прошлую
         this.openedCard.close()
         this.openedCard = card
       }
     } else {
-      // еще нет открытой карты
       this.openedCard = card
     }
 
@@ -163,19 +159,17 @@ class GameScene extends Phaser.Scene {
        this.restart()
      }
     })
-
-    
   }
+
   initCardPositions(){
     let positions = []
     let paddingCard = 4
     let cardTexture = this.textures.get('card').getSourceImage()
     let cardWidth = cardTexture.width + paddingCard
     let cardHeight = cardTexture.height + paddingCard
-    let offsetX = (this.sys.game.config.width - cardWidth * config.cols) / 2 + cardWidth / 2;
-    let offsetY = (this.sys.game.config.height - cardHeight * config.rows) / 2 + cardHeight /2;
-
-    let id = 0;
+    let offsetX = (this.sys.game.config.width - cardWidth * config.cols) / 2 + cardWidth / 2
+    let offsetY = (this.sys.game.config.height - cardHeight * config.rows) / 2 + cardHeight /2
+    let id = 0
 
     for (let row = 0; row < config.rows; row++) {
       for (let col = 0; col < config.cols; col++) {
