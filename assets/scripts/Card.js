@@ -42,6 +42,5 @@ class Card extends Phaser.GameObjects.Sprite {
       this.opened = false
       this.flip()
     }
-    
   }
 }
