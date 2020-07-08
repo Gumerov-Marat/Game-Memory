@@ -22,7 +22,7 @@ class Card extends Phaser.GameObjects.Sprite {
   }
 
   show() {
-    let  texture =  this.opened ? 'card' + this.value : 'card;
+    let  texture =  this.opened ? 'card' + this.value : 'card'
     this.setTexture(texture)
     this.scene.tweens.add({
       targets: this,
@@ -38,7 +38,10 @@ class Card extends Phaser.GameObjects.Sprite {
   }
 
   close() {
-    this.opened = false
-    this.flip(')
+    if (this.opened) {
+      this.opened = false
+      this.flip()
+    }
+    
   }
 }

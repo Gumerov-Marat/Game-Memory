@@ -37,7 +37,7 @@ class GameScene extends Phaser.Scene {
 
   initCards(){
     let positions = this.getCardPositions()
-  
+
     this.cards.forEach(card => {
       let position = positions.pop()
       card.close()
